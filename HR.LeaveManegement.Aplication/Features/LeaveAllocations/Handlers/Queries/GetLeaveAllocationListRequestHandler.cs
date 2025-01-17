@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HR.LeaveManegement.Aplication.DTOs.LeaveAllocation;
-using HR.LeaveManegement.Aplication.Features.LeaveAllocation.Requests.Queries;
+using HR.LeaveManegement.Aplication.Features.LeaveAllocations.Requests.Queries;
 using HR.LeaveManegement.Aplication.Features.LeaveTypes.Requests.Querries;
 using HR.LeaveManegement.Aplication.Persistance.Contracts;
 using HR.LeaveManegement.Domain;

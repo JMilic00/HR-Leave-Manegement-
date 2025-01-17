@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using HR.LeaveManegement.Aplication.DTOs.LeaveType.Validators;
 using HR.LeaveManegement.Aplication.Features.LeaveTypes.Requests.Commands;
 using HR.LeaveManegement.Aplication.Persistance.Contracts;
 using HR.LeaveManegement.Domain;
@@ -8,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace HR.LeaveManegement.Aplication.Features.LeaveTypes.Handlers.Commands
 {
@@ -23,6 +26,12 @@ namespace HR.LeaveManegement.Aplication.Features.LeaveTypes.Handlers.Commands
         }
         public async Task<int> Handle(CreateLeaveTypeCommand request, CancellationToken cancellationToken)
         {
+            var validator = new CreateLeaveTypeDtoValidator();
+            var validationResult = await validator.ValidateAsync(request.LeaveTypeDto);
+
+            if (validationResult.IsValid == false)
+                throw new Exception();
+
             var leaveType = _mapper.Map<LeaveType>(request.LeaveTypeDto);
 
             leaveType = await _leaveTypeRepository.Add(leaveType);
