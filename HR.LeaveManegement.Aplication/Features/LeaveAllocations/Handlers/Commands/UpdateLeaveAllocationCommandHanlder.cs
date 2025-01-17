@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using HR.LeaveManegement.Aplication.DTOs.LeaveAllocation.Validators;
 using HR.LeaveManegement.Aplication.Features.LeaveAllocations.Requests.Commands;
 using HR.LeaveManegement.Aplication.Persistance.Contracts;
