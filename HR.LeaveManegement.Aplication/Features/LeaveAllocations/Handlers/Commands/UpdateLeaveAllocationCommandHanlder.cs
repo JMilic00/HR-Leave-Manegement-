@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using FluentValidation;
 using HR.LeaveManegement.Aplication.DTOs.LeaveAllocation.Validators;
+using HR.LeaveManegement.Aplication.Exeptions;
 using HR.LeaveManegement.Aplication.Features.LeaveAllocations.Requests.Commands;
-using HR.LeaveManegement.Aplication.Persistance.Contracts;
+using HR.LeaveManegement.Aplication.Contracts.Persistance;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace HR.LeaveManegement.Aplication.Features.LeaveAllocations.Handlers.Comma
             var validationResult = await validator.ValidateAsync(request.LeaveAllocationDto);
 
             if (validationResult.IsValid == false)
-                throw new Exception();
+                throw new ValidationException(validationResult);
 
             var leaveAllocation = await _leaveAllocationRepository.Get(request.LeaveAllocationDto.Id);
 

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using HR.LeaveManegement.Aplication.Exeptions;
 using HR.LeaveManegement.Aplication.Features.LeaveAllocations.Requests.Commands;
 using HR.LeaveManegement.Aplication.Features.LeaveAllocations.Requests.Commands;
-using HR.LeaveManegement.Aplication.Persistance.Contracts;
+using HR.LeaveManegement.Aplication.Contracts.Persistance;
+using HR.LeaveManegement.Domain;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,9 @@ namespace HR.LeaveManegement.Aplication.Features.LeaveAllocations.Handlers.Comma
         public async Task<Unit> Handle(DeleteLeaveAllocationCommand request, CancellationToken cancellationToken)
         {
             var leaveAllocation = await _leaveAllocationRepository.Get(request.Id);
+
+            if (leaveAllocation == null)
+                throw new NotFoundException(nameof(LeaveAllocation), request.Id);
 
             await _leaveAllocationRepository.Delete(leaveAllocation);
 

@@ -2,7 +2,7 @@
 using HR.LeaveManegement.Aplication.DTOs.LeaveAllocation;
 using HR.LeaveManegement.Aplication.Features.LeaveAllocations.Requests.Queries;
 using HR.LeaveManegement.Aplication.Features.LeaveTypes.Requests.Querries;
-using HR.LeaveManegement.Aplication.Persistance.Contracts;
+using HR.LeaveManegement.Aplication.Contracts.Persistance;
 using HR.LeaveManegement.Domain;
 using MediatR;
 using System;

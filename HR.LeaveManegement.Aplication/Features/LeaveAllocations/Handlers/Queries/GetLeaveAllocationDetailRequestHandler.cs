@@ -2,7 +2,7 @@
 using HR.LeaveManegement.Aplication.DTOs.LeaveAllocation;
 using HR.LeaveManegement.Aplication.Features.LeaveAllocations.Requests.Queries;
 using HR.LeaveManegement.Aplication.Features.LeaveTypes.Requests.Querries;
-using HR.LeaveManegement.Aplication.Persistance.Contracts;
+using HR.LeaveManegement.Aplication.Contracts.Persistance;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace HR.LeaveManegement.Aplication.Features.LeaveAllocations.Handlers.Queri
 
         public async Task<LeaveAllocationDto> Handle(GetLeaveAllocationDetailRequest request, CancellationToken cancellationToken)
         {
-            var leaveAllocation = await _leaveAllocationRepository.GetLeaveAllocationWithDetails(request.id);
+            var leaveAllocation = await _leaveAllocationRepository.GetLeaveAllocationWithDetails(request.Id);
             return _mapper.Map<LeaveAllocationDto>(leaveAllocation);
         }
     }

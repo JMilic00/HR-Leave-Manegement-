@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using HR.LeaveManegement.Aplication.Persistance.Contracts;
+using HR.LeaveManegement.Aplication.Contracts.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +14,11 @@ namespace HR.LeaveManegement.Aplication.DTOs.LeaveAllocation.Validators
         public ILeaveAllocationDtoValidator(ILeaveTypeRepository leaveTypeRepository)
         {
             _leaveTypeRepository = leaveTypeRepository;
-            RuleFor(p => p.StartDate)
-             .LessThan(p => p.EndDate).WithMessage("{PropertyName} must be before {ComparisonValue}");
+            RuleFor(p => p.NumberOfDays)
+             .GreaterThan(0).WithMessage("{PropertyName} must be greater {ComparisonValue}");
 
-            RuleFor(p => p.EndDate)
-             .LessThan(p => p.StartDate).WithMessage("{PropertyName} must be after {ComparisonValue}");
+            RuleFor(p => p.Period)
+             .GreaterThanOrEqualTo(DateTime.Now.Year).WithMessage("{PropertyName} must be after {ComparisonValue}");
 
             RuleFor(p => p.LeaveTypeId)
              .NotNull().WithMessage("{PropertyName} must not be null.")
